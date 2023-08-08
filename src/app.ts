@@ -35,12 +35,15 @@ app.get("/users/:id", async function (req: Request, res: Response) {
     return res.send(results)
 })
 
+
+//add JOI middleware
 app.post("/users", async function (req: Request, res: Response) {
     const user = await myDataSource.getRepository(User).create(req.body)
     const results = await myDataSource.getRepository(User).save(user)
     return res.send(results)
 })
 
+//add JOI middleware
 app.put("/users/:id", async function (req: Request, res: Response) {
     const user = await myDataSource.getRepository(User).findOneBy({
         id: +req.params.id,
