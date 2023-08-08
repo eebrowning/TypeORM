@@ -4,6 +4,7 @@ import { Request, Response } from "express"
 import { User } from './entity/User'
 
 import { myDataSource } from "./data-source"
+import { createUserSchema } from "./validation/userValidation"
 // const express = require('express');
 // const User = require('./entity/user.entity')
 // const { myDataSource } = require('./data-source')
@@ -37,7 +38,7 @@ app.get("/users/:id", async function (req: Request, res: Response) {
 
 
 //add JOI middleware
-app.post("/users", async function (req: Request, res: Response) {
+app.post("/users", createUserSchema, async function (req: Request, res: Response) {
     const user = await myDataSource.getRepository(User).create(req.body)
     const results = await myDataSource.getRepository(User).save(user)
     return res.send(results)
