@@ -25,8 +25,9 @@ app.use(express.json())
 // register routes
 app.get("/users", async function (req: Request, res: Response) {
     const users = await myDataSource.getRepository(User).find();;
-    res.json(users)
-    console.log(res.json())
+    console.log('REQUEST MADE TO /users', users)
+    return res.json(users)
+    // return res.json()
 })
 
 app.get("/users/:id", async function (req: Request, res: Response) {
@@ -59,4 +60,4 @@ app.delete("/users/:id", async function (req: Request, res: Response) {
     return res.send(results)
 })
 // start express server
-app.listen(3000)
+app.listen(8000)
