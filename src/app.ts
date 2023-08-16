@@ -2,7 +2,7 @@ import * as express from "express"
 import { Request, Response } from "express"
 // import { User } from './entity/user.entity'
 import { User } from './entity/User'
-
+import * as cors from 'cors'
 import { myDataSource } from "./data-source"
 import { createUserSchema } from "./validation/userValidation"
 // const express = require('express');
@@ -21,12 +21,19 @@ myDataSource
 // create and setup express app
 const app = express();
 app.use(express.json())
-
+app.use(cors())
 // register routes
 app.get("/users", async function (req: Request, res: Response) {
     const users = await myDataSource.getRepository(User).find();;
-    console.log('REQUEST MADE TO /users', users)
-    return res.json(users)
+    // console.log('REQUEST MADE TO /users', users)
+    // let formatted = users
+    // formatted.map(user => {
+    //     JSON.stringify(user)
+    // })
+    // res.json(formatted);
+    res.json(users);
+
+    // res.json('deeeeeerp')
     // return res.json()
 })
 
